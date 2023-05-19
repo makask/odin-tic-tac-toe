@@ -91,3 +91,11 @@ header {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.player1 {
+  color: green;
+}
+
+.player2 {
+  color: blue;
+}
