@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Tic-Tac-Toe</h1>
+        <div class="status"><h1>Status</h1></div>
+      </header>
+      <div class="main">
+        <div class="board">
+          <div class="box" id="0"></div>
+          <div class="box" id="1"></div>
+          <div class="box" id="2"></div>
+          <div class="box" id="3"></div>
+          <div class="box" id="4"></div>
+          <div class="box" id="5"></div>
+          <div class="box" id="6"></div>
+          <div class="box" id="7"></div>
+          <div class="box" id="8"></div>
+        </div>
+
+        <dialog class="modal center" id="modal">
+          <form class="form" id="form">
+            <div class="inputField">
+              <label class="input-label" for="form1">(X) Player 1 name:</label>
+              <input
+                type="text"
+                name="player1Name"
+                class="formClass"
+                id="form1"
+                required
+              />
+            </div>
+            <div class="inputField">
+              <label class="input-label" for="form2">(O) Player 2 name:</label>
+              <input
+                type="text"
+                name="player2Name"
+                class="formClass"
+                id="form2"
+                required
+              />
+            </div>
+            <div class="inputField">
+              <label for="1v1" class="Title">Human vs Human:</label>
+              <input type="radio" id="1v1" name="choice" value="0" required />
+            </div>
+            <div class="inputField">
+              <label for="aiEasy" class="Title">Human vs Easy AI:</label>
+              <input
+                type="radio"
+                id="aiEasy"
+                name="choice"
+                value="1"
+                required
+              />
+            </div>
+            <div class="inputField">
+              <label for="aiHard" class="Title">Human vs Hard AI:</label>
+              <input
+                type="radio"
+                id="aiHard"
+                name="choice"
+                value="2"
+                required
+              />
+            </div>
+            <div>
+              <button type="submit" class="button startButton closeModal">
+                Start Game
+              </button>
+            </div>
+          </form>
+        </dialog>
+
+        <div class="buttons">
+          <button class="button" id="resetButton">Reset Game</button>
+          <button class="button" id="newGameButton">New Game</button>
+        </div>
+      </div>
+      <footer></footer>
+    </div>
+  </body>
+</html>
