@@ -55,6 +55,13 @@ const game = (data) => {
     } else if (choice === '1') {
       game.easyAiTurn();
       currentPlayer = player1.getPlayerMark();
+    } else if (choice === '2') {
+      game.changePlayer(currentPlayer);
+      game.hardAiTurn();
+      if (game.endConditions(board)) {
+        return;
+      }
+      game.changePlayer(currentPlayer);
     }
   };
 
@@ -79,6 +86,68 @@ const game = (data) => {
       return;
     }
     game.changePlayer(currentPlayer);
+  };
+
+  game.hardAiTurn = () => {
+    round++;
+    const move = minimax(board, 'O').index;
+    board[move] = player2.getPlayerMark();
+    let box = document.getElementById(`${move}`);
+    box.textContent = player2.getPlayerMark();
+    box.classList.add('player2');
+  };
+
+  const minimax = (board, currentPlayer) => {
+    let spacesAvailable = board.filter(
+      (space) => space !== 'X' && space !== 'O'
+    );
+    if (game.checkWinner(board, player1.getPlayerMark())) {
+      return {
+        score: -100,
+      };
+    } else if (game.checkWinner(board, player2.getPlayerMark())) {
+      return {
+        score: 100,
+      };
+    } else if (spacesAvailable.length === 0) {
+      return {
+        score: 0,
+      };
+    }
+
+    const potentialMoves = [];
+
+    for (let i = 0; i < spacesAvailable.length; i++) {
+      let move = {};
+      move.index = board[spacesAvailable[i]];
+      board[spacesAvailable[i]] = currentPlayer;
+      if (currentPlayer === player2.getPlayerMark()) {
+        move.score = minimax(board, player1.getPlayerMark()).score;
+      } else {
+        move.score = minimax(board, player2.getPlayerMark()).score;
+      }
+      board[spacesAvailable[i]] = move.index;
+      potentialMoves.push(move);
+    }
+    let bestMove = 0;
+    if (currentPlayer === player2.getPlayerMark()) {
+      let bestScore = -10000;
+      for (let i = 0; i < potentialMoves.length; i++) {
+        if (potentialMoves[i].score > bestScore) {
+          bestScore = potentialMoves[i].score;
+          bestMove = i;
+        }
+      }
+    } else {
+      let bestScore = 10000;
+      for (let i = 0; i < potentialMoves.length; i++) {
+        if (potentialMoves[i].score < bestScore) {
+          bestScore = potentialMoves[i].score;
+          bestMove = i;
+        }
+      }
+    }
+    return potentialMoves[bestMove];
   };
 
   game.changePlayer = (player) => {
