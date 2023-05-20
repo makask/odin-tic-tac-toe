@@ -52,7 +52,33 @@ const game = (data) => {
 
     if (choice === '0') {
       game.changePlayer(currentPlayer);
+    } else if (choice === '1') {
+      game.easyAiTurn();
+      currentPlayer = player1.getPlayerMark();
     }
+  };
+
+  game.easyAiTurn = () => {
+    game.changePlayer(currentPlayer);
+    round++;
+    let spaceAvailable = board.filter(
+      (space) => space !== 'X' && space !== 'O'
+    );
+
+    let aiMove =
+      spaceAvailable[Math.floor(Math.random() * spaceAvailable.length)];
+
+    board[aiMove] = player2.getPlayerMark();
+    setTimeout(() => {
+      let box = document.getElementById(`${aiMove}`);
+      box.textContent = player2.getPlayerMark();
+      box.classList.add('player2');
+    }, 200);
+
+    if (game.endConditions(board)) {
+      return;
+    }
+    game.changePlayer(currentPlayer);
   };
 
   game.changePlayer = (player) => {
