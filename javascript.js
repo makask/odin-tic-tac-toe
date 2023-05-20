@@ -63,6 +63,7 @@ const game = (data) => {
       }
       game.changePlayer(currentPlayer);
     }
+    console.log(board);
   };
 
   game.easyAiTurn = () => {
@@ -167,6 +168,7 @@ const game = (data) => {
           ? player1.getPlayerName()
           : player2.getPlayerName();
       displayController.displayTurn('status', winner + ' has won the game');
+      gameBoard.removeBoardEventListeners();
       return true;
     } else if (round === 9) {
       displayController.displayTurn('status', 'Its a tie!');
@@ -190,6 +192,27 @@ const game = (data) => {
     return result;
   };
 
+  game.reset = () => {
+    for (let i = 0; i < board.length; i++) {
+      board[i] = i;
+    }
+    document.querySelectorAll('.box').forEach((box) => {
+      box.textContent = '';
+      box.classList.remove('player1');
+      box.classList.remove('player2');
+    });
+    round = 0;
+    currentPlayer = player1.getPlayerMark();
+    gameOver = false;
+
+    displayController.displayTurn('status', `${player1.getPlayerName()} turn`);
+    gameBoard.addEventListenersToGameBoard();
+  };
+
+  game.newGame = () => {
+    location.reload();
+  };
+
   displayController.displayTurn('status', `${player1.getPlayerName()} turn`);
   gameBoard.addEventListenersToGameBoard();
 };
@@ -197,14 +220,30 @@ const game = (data) => {
 const gameBoard = (() => {
   let board = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
 
+  const handleClick = (event) => {
+    game.playMove(event.target);
+  };
+
   const addEventListenersToGameBoard = () => {
     document.querySelectorAll('.box').forEach((box) => {
-      box.addEventListener('click', (event) => {
-        game.playMove(event.target);
-      });
+      box.addEventListener('click', handleClick);
+    });
+    document
+      .getElementById('newGameButton')
+      .addEventListener('click', game.newGame);
+    document
+      .getElementById('resetButton')
+      .addEventListener('click', game.reset);
+  };
+
+  const removeBoardEventListeners = () => {
+    document.querySelectorAll('.box').forEach((box) => {
+      box.removeEventListener('click', handleClick);
     });
   };
+
   return {
+    removeBoardEventListeners,
     addEventListenersToGameBoard,
     board,
   };
