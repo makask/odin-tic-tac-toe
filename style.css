@@ -1,7 +1,17 @@
+@font-face {
+  font-family: ShadowsIntoLight;
+  src: url('./fonts/ShadowsIntoLight-Regular.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: ShadowsIntoLight;
+}
+
+body {
+  background: rgb(228, 234, 236);
 }
 
 .container {
@@ -17,6 +27,10 @@
 header {
   padding-top: 140px;
   text-align: center;
+}
+
+header h1 {
+  font-size: 40px;
 }
 
 .main {
@@ -46,6 +60,7 @@ header {
   background-color: rgb(128, 197, 199);
   cursor: pointer;
   border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .box:hover {
@@ -53,36 +68,56 @@ header {
 }
 
 .buttons {
+  margin-top: 30px;
   padding: 30px;
 }
 
 .button {
-  height: 2rem;
+  height: 2.4rem;
   width: 10rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: white;
   background: rgb(127, 125, 161);
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.startButton {
+  margin-top: 25px;
+  width: 100%;
 }
 
 .modal {
   padding: 1em;
-  max-width: 50ch;
+  width: 400px;
+  height: 500px;
   border-radius: 10px;
+  font-weight: bolder;
+  font-size: 20px;
 }
 
 .modal::backdrop {
-  background: linear-gradient(45deg, red, blue);
+  background-color: lightgrey;
   opacity: 0.2;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 10px;
+  margin-top: 40px;
+  font-size: 1.4rem;
+  justify-content: center;
 }
 
 .inputField {
   padding: 10px;
+}
+
+input {
+  width: 40%;
+  font-size: 1.2rem;
 }
 
 .center {

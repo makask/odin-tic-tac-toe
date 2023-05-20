@@ -63,7 +63,6 @@ const game = (data) => {
       }
       game.changePlayer(currentPlayer);
     }
-    console.log(board);
   };
 
   game.easyAiTurn = () => {
@@ -158,7 +157,7 @@ const game = (data) => {
         : player1.getPlayerMark();
     let displayText =
       currentPlayer === 'X' ? player1.getPlayerName() : player2.getPlayerName();
-    displayController.displayTurn('status', `${displayText} turn`);
+    displayController.displayTurn('status', `${displayText}'s turn`);
   };
 
   game.endConditions = (board) => {
@@ -167,7 +166,7 @@ const game = (data) => {
         currentPlayer === 'X'
           ? player1.getPlayerName()
           : player2.getPlayerName();
-      displayController.displayTurn('status', winner + ' has won the game');
+      displayController.displayTurn('status', winner + ' has won the game !');
       gameBoard.removeBoardEventListeners();
       return true;
     } else if (round === 9) {
@@ -205,7 +204,10 @@ const game = (data) => {
     currentPlayer = player1.getPlayerMark();
     gameOver = false;
 
-    displayController.displayTurn('status', `${player1.getPlayerName()} turn`);
+    displayController.displayTurn(
+      'status',
+      `${player1.getPlayerName()}'s turn`
+    );
     gameBoard.addEventListenersToGameBoard();
   };
 
@@ -213,7 +215,7 @@ const game = (data) => {
     location.reload();
   };
 
-  displayController.displayTurn('status', `${player1.getPlayerName()} turn`);
+  displayController.displayTurn('status', `${player1.getPlayerName()}'s turn`);
   gameBoard.addEventListenersToGameBoard();
 };
 
